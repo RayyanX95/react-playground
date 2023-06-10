@@ -11,8 +11,8 @@ const DrinkSearch = () => {
     if (drinkQuery) {
       try {
         const data = await drinkSearchApi(drinkQuery);
-        console.log("data", data);
-        setDrinks(data.drinks);
+
+        setDrinks(data);
       } catch (error) {
         setError(error);
       }
@@ -21,7 +21,7 @@ const DrinkSearch = () => {
     setDrinkQuery("");
   };
 
-  const renderDrinkResults = () => {
+  const drinkResults = () => {
     const ingredientList = (drink) => {
       const ingredients = [];
       const maxIngredients = 15;
@@ -34,7 +34,7 @@ const DrinkSearch = () => {
       return ingredients;
     };
 
-    return drinks?.map((drink) => {
+    return drinks.map((drink) => {
       return (
         <div
           key={drink.idDrink}
@@ -65,11 +65,10 @@ const DrinkSearch = () => {
   };
 
   return (
-    <div className="container p-5">
-      <h5>Form</h5>
-      <form className="form-group pb-4" onSubmit={handleDrinkQuery}>
+    <div className="container">
+      <form className="form-group m-auto w-50 pt-2" onSubmit={handleDrinkQuery}>
         <input
-          className="form-control border-dark w-50"
+          className="form-control"
           placeholder="search for a drink..."
           type="search"
           value={drinkQuery}
@@ -79,11 +78,7 @@ const DrinkSearch = () => {
           Search
         </button>
       </form>
-
-      <h5>List of drinks</h5>
-      {drinks.length > 0 && (
-        <div className="d-flex flex-wrap">{renderDrinkResults()}</div>
-      )}
+      {drinks && <div className="d-flex flex-wrap">{drinkResults()}</div>}
       {!drinks && <h5 className="text-center mt-5">🍹 No drinks found 🍹</h5>}
       {error && <h5 className="text-center mt-5">🛑 Service unavailable 🛑</h5>}
     </div>

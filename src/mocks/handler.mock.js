@@ -6,15 +6,17 @@ export const handlers = [
     (req, res, ctx) => {
       return res(
         ctx.status(200),
-        ctx.json([
-          {
-            idDrink: 1,
-            strDrinkThumb: "./images/thumbs-down.svg",
-            strDrink: "test drink",
-            strInstructions: "test instructions",
-            strIngredient1: "test ingredient",
-          },
-        ])
+        ctx.json({
+          drinks: [
+            {
+              idDrink: 1,
+              strDrinkThumb: "./images/thumbs-down.svg",
+              strDrink: "test drink",
+              strInstructions: "test instructions",
+              strIngredient1: "test ingredient",
+            },
+          ],
+        })
       );
     }
   ),
