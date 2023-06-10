@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
-import DrinkSearch from "./drink-search.jsx";
-import { mockServer } from "../mocks/server.mock.js";
+import { rest } from "msw";
+import DrinkSearch from "./drink-search";
+import { mockServer } from "../mocks/server.mock";
 
 beforeAll(() => mockServer.listen());
 afterEach(() => mockServer.resetHandlers());
@@ -13,10 +14,37 @@ test("renders mock drink data", async () => {
 
   user.type(searchInput, "vodka, {enter}");
 
-  expect(await screen.findByRole("img")).toBeInTheDocument();
-  // expect(
-  //   screen.getByRole("heading", { name: /test drink/i })
-  // ).toBeInTheDocument();
-  // expect(screen.getByText(/test ingredient/i)).toBeInTheDocument();
-  // expect(screen.getByText(/test instructions/i)).toBeInTheDocument();
+  expect(
+    await screen.findByRole("img", { name: /test drink/i })
+  ).toBeInTheDocument();
+
+  expect(
+    screen.getByRole("heading", { name: /test drink/i })
+  ).toBeInTheDocument();
+  expect(screen.getByText(/test ingredient/i)).toBeInTheDocument();
+  expect(screen.getByText(/test instructions/i)).toBeInTheDocument();
+});
+
+test("renders no drink results", async () => {
+  mockServer.use(
+    rest.get(
+      "https://www.thecocktaildb.com/api/json/v1/1/search.php",
+      (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            drinks: null,
+          })
+        );
+      }
+    )
+  );
+  render(<DrinkSearch />);
+  const searchInput = screen.getByRole("searchbox");
+
+  user.type(searchInput, "vodka, {enter}");
+
+  expect(
+    await screen.findByRole("heading", { name: /no drinks found/i })
+  ).toBeInTheDocument();
 });
