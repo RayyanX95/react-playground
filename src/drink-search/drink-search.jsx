@@ -81,6 +81,7 @@ const DrinkSearch = () => {
       {drinks && <div className="d-flex flex-wrap">{drinkResults()}</div>}
       {!drinks && <h5 className="text-center mt-5">🍹 No drinks found 🍹</h5>}
       {error && <h5 className="text-center mt-5">🛑 Service unavailable 🛑</h5>}
+      {/* new commit */}
     </div>
   );
 };
