@@ -4,7 +4,11 @@ const Product = ({ title, price, image, id }) => {
   const { getDetails } = useRetail();
   return (
     <div className="col-4 mb-2" style={{ cursor: "pointer" }}>
-      <div onClick={() => getDetails(id)} className="card shadow">
+      <div
+        onClick={() => getDetails(id)}
+        className="card shadow"
+        data-testid="product-card"
+      >
         <img
           className="m-auto"
           style={{ width: "12rem", height: "12rem" }}
