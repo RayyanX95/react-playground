@@ -75,4 +75,56 @@ describe("integration: ProductDetails", () => {
 
     expect(screen.getByText(/qty:10/i)).toBeInTheDocument();
   });
+
+  test("A user cannot submit a quantity greater than 10", () => {
+    render(
+      <RetailProvider products={fakeProducts}>
+        <Retail />
+      </RetailProvider>
+    );
+
+    addFirstItemToCart();
+
+    const quantityInput = screen.getByRole("spinbutton");
+    userEvent.clear(quantityInput);
+    userEvent.type(quantityInput, "11");
+
+    userEvent.click(screen.getByRole("button", { name: /add to cart/i }));
+
+    expect(screen.getByText(/qty:1/i)).toBeInTheDocument();
+  });
+
+  test("A user cannot submit a quantity less than 1", () => {
+    render(
+      <RetailProvider products={fakeProducts}>
+        <Retail />
+      </RetailProvider>
+    );
+
+    addFirstItemToCart();
+
+    const quantityInput = screen.getByRole("spinbutton");
+    userEvent.clear(quantityInput);
+    userEvent.type(quantityInput, "-1");
+
+    userEvent.click(screen.getByRole("button", { name: /add to cart/i }));
+
+    expect(screen.getByText(/qty:1/i)).toBeInTheDocument();
+  });
+
+  test("A user can add an item to favorites", () => {
+    render(
+      <RetailProvider products={fakeProducts}>
+        <Retail />
+      </RetailProvider>
+    );
+
+    addFirstItemToCart();
+
+    userEvent.click(screen.getByRole("button", { name: /add to favorites/i }));
+
+    expect(
+      screen.getByRole("button", { name: /added to favorites/i })
+    ).toBeInTheDocument();
+  });
 });
