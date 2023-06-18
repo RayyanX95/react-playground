@@ -57,4 +57,22 @@ describe("integration: ProductDetails", () => {
 
     expect(screen.getByText(/1 items/i)).toBeInTheDocument();
   });
+
+  test("should able to update quantity for cart items", () => {
+    render(
+      <RetailProvider products={fakeProducts}>
+        <Retail />
+      </RetailProvider>
+    );
+
+    addFirstItemToCart();
+
+    const quantityInput = screen.getByRole("spinbutton");
+    userEvent.clear(quantityInput);
+    userEvent.type(quantityInput, "10");
+
+    userEvent.click(screen.getByRole("button", { name: /add to cart/i }));
+
+    expect(screen.getByText(/qty:10/i)).toBeInTheDocument();
+  });
 });
