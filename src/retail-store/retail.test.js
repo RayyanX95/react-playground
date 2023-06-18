@@ -33,3 +33,28 @@ test("should user able to view product details", () => {
   const description = screen.getByText(fakeProducts[0].description);
   expect(description).toBeInTheDocument();
 });
+
+describe("integration: ProductDetails", () => {
+  function addFirstItemToCart() {
+    const firstProduct = fakeProducts[0];
+    // Only one heading has the title before showing the product details
+    const firstProductTitle = screen.getByRole("heading", {
+      name: firstProduct.title,
+    });
+
+    userEvent.click(firstProductTitle);
+    userEvent.click(screen.getByRole("button", { name: /add to cart/i }));
+  }
+
+  test("should use able to add a product to cart", () => {
+    render(
+      <RetailProvider products={fakeProducts}>
+        <Retail />
+      </RetailProvider>
+    );
+
+    addFirstItemToCart();
+
+    expect(screen.getByText(/1 items/i)).toBeInTheDocument();
+  });
+});
