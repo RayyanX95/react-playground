@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    // make prettier rules override the above rules if there's conflicts
+    "prettier"
+  ],
+  "plugins": ["react", "jsx-a11y", "react-hooks"],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": 0,
+    // important for not importing React when unnecessary
+    "react/react-in-jsx-scope": 0,
+    "no-unused-vars": "warn",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1,
+        "maxBOF": 0
+      }
+    ]
+  }
+}
