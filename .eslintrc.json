@@ -46,9 +46,10 @@
     "semi": "error",
     "no-multi-spaces": "error",
     "prefer-template": "warn",
-    "curly": ["error", "all"],
+    "curly": ["warn", "all"],
     "eqeqeq": "error",
     "prefer-const": "warn",
+    "no-constant-condition": "warn",
     "arrow-spacing": [
       "error",
       {
