@@ -5,7 +5,8 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
     // make prettier rules override the above rules if there's conflicts
-    "prettier"
+    // "prettier",
+    "plugin:prettier/recommended"
   ],
   "plugins": ["react", "jsx-a11y", "react-hooks"],
   "parserOptions": {
