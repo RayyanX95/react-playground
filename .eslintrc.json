@@ -38,7 +38,7 @@
   "rules": {
     "react/prop-types": 0,
     "no-unused-vars": "warn",
-    "comma-dangle": ["warn", "always-multiline"],
+    // "comma-dangle": ["warn", "always-multiline"],
     "react-hooks/exhaustive-deps": "off",
     "no-useless-concat": "error",
     "no-useless-return": "error",
