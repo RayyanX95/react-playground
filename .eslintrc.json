@@ -11,7 +11,7 @@
   // ],
   // "plugins": ["react", "jsx-a11y", "react-hooks", "prettier"],
 
-  "plugins": ["react", "import", "prettier"],
+  "plugins": ["react", "import", "jest", "prettier"],
   "extends": [
     "eslint:recommended",
     "react-app",
@@ -28,7 +28,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "settings": {
     "react": {
@@ -69,6 +70,8 @@
         "endOfLine": "auto"
       }
     ],
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "error",
+    "jest/no-duplicate-hooks": "error", // Prevents duplicate test hooks (beforeEach, afterEach, etc.)
+    "jest/no-identical-title": "error" // Prevents duplicate test titles/names
   }
 }
