@@ -11,7 +11,7 @@
   // ],
   // "plugins": ["react", "jsx-a11y", "react-hooks", "prettier"],
 
-  "plugins": ["prettier"],
+  "plugins": ["react", "import", "prettier"],
   "extends": [
     "eslint:recommended",
     "react-app",
@@ -19,7 +19,7 @@
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
-    "ecmaVersion": 2021,
+    "ecmaVersion": "latest",
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -33,12 +33,18 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
     }
   },
+
   "rules": {
     "react/prop-types": 0,
     "no-unused-vars": "warn",
-    "comma-dangle": ["warn", "always-multiline"],
+    // "comma-dangle": ["warn", "always-multiline"],
     "react-hooks/exhaustive-deps": "off",
     "no-useless-concat": "error",
     "no-useless-return": "error",
@@ -62,6 +68,7 @@
       {
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "import/no-unresolved": "error"
   }
 }
