@@ -1,9 +1,12 @@
 import "./App.css";
 import { Container } from "bootstrap";
+import Vote from "./mui/vote";
 
 function App() {
   return (
-    <Container>{/* Add the component you wanna test here ✌️ */}</Container>
+    <Container>
+      <Vote totalGlobalLikes={10} />
+    </Container>
   );
 }
 
