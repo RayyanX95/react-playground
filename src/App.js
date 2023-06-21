@@ -1,5 +1,5 @@
 import "./App.css";
-import { Container } from "reactstrap";
+import { Container } from "bootstrap";
 
 function App() {
   return (
