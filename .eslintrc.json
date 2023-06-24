@@ -11,8 +11,8 @@
     {
       "files": ["*.test.js"],
       "extends": [
-        "plugin:testing-library/react"
-        // "plugin:jest-dom/recommended"
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended"
       ],
       "rules": {
         "testing-library/prefer-screen-queries": "error",
