@@ -23,4 +23,11 @@ jobs:
         run: npm install
 
       - name: Run ESLint
+        id: eslint
         run: npm run lint
+
+      - name: Prevent merge if ESLint fails
+        if: ${{ job.status != 'success' }}
+        run: |
+          echo "ESLint check failed. Cannot merge pull request."
+          exit 1
