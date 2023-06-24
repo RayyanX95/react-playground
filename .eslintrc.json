@@ -6,6 +6,21 @@
     "prettier",
     "plugin:prettier/recommended"
   ],
+
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "extends": [
+        "plugin:testing-library/react"
+        // "plugin:jest-dom/recommended"
+      ],
+      "rules": {
+        "testing-library/prefer-screen-queries": "error",
+        "testing-library/no-debugging-utils": "warn"
+      }
+    }
+  ],
+
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
