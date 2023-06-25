@@ -5,40 +5,44 @@ describe("Checkout Flow", () => {
     cy.visit("/");
 
     // Enter Address
-    cy.get('input[name="firstName"]').type(user.firstName);
-    cy.get('input[name="lastName"]').type(user.lastName);
-    cy.get('input[name="address1"]').type(user.address.street);
-    cy.get('input[name="city"]').type(user.address.city);
-    cy.get('input[name="state"]').type(user.address.county);
-    cy.get('input[name="zipCode"]').type(user.address.zipCode);
-    cy.get('input[name="country"]').type(user.address.country);
-    cy.contains(/next/i).click();
+    cy.findByRole("textbox", { name: /first name/i }).type(user.firstName);
+    cy.findByRole("textbox", { name: /last name/i }).type(user.lastName);
+    cy.findByRole("textbox", { name: /address line 1/i }).type(
+      user.address.street
+    );
+    cy.findByRole("textbox", { name: /city/i }).type(user.address.city);
+    cy.findByRole("textbox", { name: /state/i }).type(user.address.county);
+    cy.findByRole("textbox", { name: /postal code/i }).type(
+      user.address.zipCode
+    );
+    cy.findByRole("textbox", { name: /country/i }).type(user.address.country);
+    cy.findByText(/next/i).click();
 
     // Enter Payment Info
-    cy.get('input[name="cardType"]').type(user.type);
-    cy.get('input[name="cardHolder"]').type(user.fullName);
-    cy.get('input[name="cardNumber"]').type(user.number);
-    cy.get('input[name="expiryDate"]').type(user.untilEnd);
-    cy.get('input[name="cardCvv"]').type(user.ccv);
-    cy.contains(/next/i).click();
+    cy.findByRole("textbox", { name: /card type/i }).type(user.type);
+    cy.findByRole("textbox", { name: /name on card/i }).type(user.fullName);
+    cy.findByRole("textbox", { name: /card number/i }).type(user.number);
+    cy.findByRole("textbox", { name: /expiration date/i }).type(user.untilEnd);
+    cy.findByRole("textbox", { name: /cvv/i }).type(user.ccv);
+    cy.findByText(/next/i).click();
 
     // Verify Shipping Details
-    cy.contains(user.fullName).should("be.visible");
-    cy.contains(user.address.street).should("be.visible");
-    cy.contains(
+    cy.findByText(user.fullName).should("be.visible");
+    cy.findByText(user.address.street).should("be.visible");
+    cy.findByText(
       `${user.address.city}, ${user.address.county} ${user.address.zipCode}`
     ).should("be.visible");
-    cy.contains(user.address.country).should("be.visible");
+    cy.findByText(user.address.country).should("be.visible");
 
     // Verify Payment Details
-    cy.contains(user.type).should("be.visible");
-    cy.contains(user.fullName).should("be.visible");
-    cy.contains(user.number).should("be.visible");
-    cy.contains(user.untilEnd).should("be.visible");
-    cy.contains(/place order/i).click();
+    cy.findByText(user.type).should("be.visible");
+    cy.findByText(user.fullName).should("be.visible");
+    cy.findByText(user.number).should("be.visible");
+    cy.findByText(user.untilEnd).should("be.visible");
+    cy.findByText(/place order/i).click();
 
     // Verify Order Submitted
-    cy.contains(/thank you for your order/i).should("be.visible");
-    cy.contains(/your order number is #2001539/i).should("be.visible");
+    cy.findByText(/thank you for your order/i).should("be.visible");
+    cy.findByText(/your order number is #2001539/i).should("be.visible");
   });
 });
