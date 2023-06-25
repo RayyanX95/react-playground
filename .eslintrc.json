@@ -19,6 +19,9 @@
     "es2021": true,
     "jest": true
   },
+  "globals": {
+    "cy": "readonly"
+  },
   "settings": {
     "react": {
       "version": "detect"
